@@ -1,5 +1,5 @@
 {
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": false,
   "rewrites": [
     { "source": "/restaurant-profit-audit", "destination": "/a.html" },
@@ -8,11 +8,8 @@
   ],
   "redirects": [
     { "source": "/a", "destination": "/restaurant-profit-audit", "statusCode": 301 },
-    { "source": "/a.html", "destination": "/restaurant-profit-audit", "statusCode": 301 },
     { "source": "/b", "destination": "/restaurant-sales-intelligence", "statusCode": 301 },
-    { "source": "/b.html", "destination": "/restaurant-sales-intelligence", "statusCode": 301 },
-    { "source": "/c", "destination": "/restaurant-profit-leaks", "statusCode": 301 },
-    { "source": "/c.html", "destination": "/restaurant-profit-leaks", "statusCode": 301 }
+    { "source": "/c", "destination": "/restaurant-profit-leaks", "statusCode": 301 }
   ],
   "headers": [
     {
