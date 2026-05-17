@@ -1,0 +1,30 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/restaurant-profit-audit", "destination": "/a.html" },
+    { "source": "/restaurant-sales-intelligence", "destination": "/b.html" }
+  ],
+  "redirects": [
+    { "source": "/a", "destination": "/restaurant-profit-audit", "statusCode": 301 },
+    { "source": "/a.html", "destination": "/restaurant-profit-audit", "statusCode": 301 },
+    { "source": "/b", "destination": "/restaurant-sales-intelligence", "statusCode": 301 },
+    { "source": "/b.html", "destination": "/restaurant-sales-intelligence", "statusCode": 301 }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    },
+    {
+      "source": "/uploads/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ]
+}

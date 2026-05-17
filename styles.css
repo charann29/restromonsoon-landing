@@ -1,0 +1,356 @@
+/* Monsoon — Restaurant Sales Intelligence */
+/* Brand tokens. Source of truth defined by user. */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* offset for sticky nav */
+}
+:root {
+  /* Theme: maroon (default) */
+  --maroon-900: #4a0a13;
+  --maroon-800: #6D0F1B;
+  --maroon-700: #8C1D2D;
+  --maroon-600: #a52a3c;
+  --maroon-50: #f9eaec;
+
+  --accent-pos: #1E8E5A;
+  --accent-neg: #C0392B;
+  --accent-amber: #C08A2E;
+
+  --cream: #F8F5F2;
+  --cream-deep: #EFE9E2;
+  --surface: #FFFFFF;
+  --ink: #111111;
+  --ink-2: #2A2A2A;
+  --muted: #5B5B5B;
+  --muted-2: #8A8581;
+  --border: #E9E1DA;
+  --border-2: #D9CFC4;
+
+  --r-card: 20px;
+  --r-btn: 14px;
+  --r-pill: 999px;
+
+  --shadow-1: 0 1px 2px rgba(0,0,0,.04), 0 10px 30px rgba(0,0,0,.04);
+  --shadow-2: 0 1px 2px rgba(0,0,0,.05), 0 20px 50px rgba(74,10,19,.08);
+  --shadow-3: 0 24px 60px rgba(74,10,19,.18);
+
+  --font: "Poppins", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-italic: "Cormorant Garamond", "Poppins", serif; /* for the wordmark feel */
+}
+
+/* Theme variants */
+[data-theme="gold"] {
+  --maroon-800: #6D0F1B;
+  --accent-pos: #C08A2E;
+  --accent-amber: #C08A2E;
+}
+[data-theme="green"] {
+  --maroon-800: #6D0F1B;
+  --accent-pos: #1E8E5A;
+}
+[data-theme="ink"] {
+  --maroon-900: #14110f;
+  --maroon-800: #1c1816;
+  --maroon-700: #2a2421;
+  --maroon-50: #f4efe9;
+  --cream: #f6f2ec;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font);
+  background: #f1ece6;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Landing root is rendered inside a DCArtboard at fixed width */
+.ml-root {
+  width: 100%;
+  min-height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--cream);
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: -0.005em;
+}
+.ml-root > .ml-foot { margin-top: 0; }
+
+.ml-root h1, .ml-root h2, .ml-root h3, .ml-root h4 {
+  margin: 0;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.ml-root p { margin: 0; }
+
+.ml-root .wordmark {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+}
+
+/* shared button */
+.ml-btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--maroon-800); color: #fff;
+  font: 600 14px/1 var(--font);
+  letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 18px 24px; border-radius: var(--r-btn);
+  border: none; cursor: pointer;
+  transition: background .18s ease, transform .18s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ml-btn:hover { background: var(--maroon-700); }
+.ml-btn .arr { display: inline-block; transition: transform .18s ease; }
+.ml-btn:hover .arr { transform: translateX(4px); }
+.ml-btn.ghost {
+  background: transparent; color: var(--maroon-800);
+  border: 1.5px solid var(--maroon-800);
+}
+.ml-btn.ghost:hover { background: var(--maroon-800); color: #fff; }
+.ml-btn.light { background: #fff; color: var(--maroon-800); }
+.ml-btn.light:hover { background: var(--cream); }
+
+.ml-eyebrow {
+  font: 600 12px/1 var(--font);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--maroon-800);
+}
+
+/* Pulse dot */
+.pulse-dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-pos); }
+.pulse-dot::after {
+  content:""; position: absolute; inset: -4px; border-radius: 50%;
+  border: 2px solid var(--accent-pos);
+  animation: pulse 1.8s ease-out infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(.6); opacity: .8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Anim utility */
+@keyframes drawLine { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
+@keyframes growBar { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+.fade-up { animation: fadeUp .8s ease both; }
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Soft divider */
+.ml-divider { height: 1px; background: var(--border); width: 100%; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   SCROLL-REVEAL ANIMATION SYSTEM
+   ══════════════════════════════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Staggered children — triggered when parent .reveal gets .is-visible */
+.reveal.is-visible .reveal-stagger > * {
+  opacity: 1;
+  transform: none;
+}
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+}
+.reveal-stagger > *:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger > *:nth-child(2) { transition-delay: 80ms; }
+.reveal-stagger > *:nth-child(3) { transition-delay: 100ms; }
+.reveal-stagger > *:nth-child(4) { transition-delay: 180ms; }
+.reveal-stagger > *:nth-child(5) { transition-delay: 240ms; }
+.reveal-stagger > *:nth-child(6) { transition-delay: 300ms; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   WHATSAPP BUTTON GLOW & PULSE
+   ══════════════════════════════════════════════════════════════════════ */
+.ml-btn.wa-btn {
+  position: relative;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, .3), 0 0 0 0 rgba(37, 211, 102, .2);
+  animation: waGlow 2.5s ease-in-out infinite;
+}
+@keyframes waGlow {
+  0%, 100% { box-shadow: 0 4px 16px rgba(37, 211, 102, .3), 0 0 0 0 rgba(37, 211, 102, .15); }
+  50% { box-shadow: 0 6px 24px rgba(37, 211, 102, .45), 0 0 0 8px rgba(37, 211, 102, .08); }
+}
+.ml-btn.wa-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(37, 211, 102, .5);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   GOLD ACCENT TEXT (shared by A & C heroes)
+   ══════════════════════════════════════════════════════════════════════ */
+.hero-h1 .accent,
+.hero-edit-h1 .italic {
+  background: linear-gradient(135deg, #FFD54F 0%, #FFAB00 50%, #FF8F00 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   DRAMATIC SECTION BREAKS
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* Gradient noise texture overlay for premium feel */
+.ml-root::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+.ml-root > * { position: relative; z-index: 1; }
+
+/* Alternating section tints */
+.ml-root > *:nth-child(even) {
+  background: rgba(255, 255, 255, .35);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   FEATURE CARD GLOW ON HOVER
+   ══════════════════════════════════════════════════════════════════════ */
+.feat-card {
+  transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease, border-color .35s ease;
+}
+.feat-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 20px 48px rgba(109, 15, 27, .12),
+    0 4px 12px rgba(109, 15, 27, .06),
+    0 0 0 1px rgba(109, 15, 27, .15);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   STATS BAR GRADIENT SHIMMER
+   ══════════════════════════════════════════════════════════════════════ */
+.stats-bar {
+  background: linear-gradient(135deg, var(--maroon-900) 0%, var(--maroon-800) 40%, var(--maroon-700) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.stats-bar::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -100%; width: 200%; height: 100%;
+  background: linear-gradient(90deg, transparent 30%, rgba(255,255,255,.06) 50%, transparent 70%);
+  animation: shimmer 4s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0% { transform: translateX(-30%); }
+  100% { transform: translateX(30%); }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   MID-PAGE CTA GLOW BORDER
+   ══════════════════════════════════════════════════════════════════════ */
+.mid-cta-card {
+  position: relative;
+  overflow: hidden;
+}
+.mid-cta-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 26px;
+  background: linear-gradient(135deg, var(--maroon-800), transparent 40%, var(--maroon-800));
+  z-index: -1;
+  animation: borderGlow 3s ease-in-out infinite alternate;
+  opacity: .3;
+}
+@keyframes borderGlow {
+  0% { opacity: .15; }
+  100% { opacity: .4; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   CTA BANNER — DRAMATIC BG
+   ══════════════════════════════════════════════════════════════════════ */
+.cta-banner {
+  background: linear-gradient(135deg, var(--cream-deep) 0%, #F0E4D8 40%, var(--maroon-50) 100%);
+  border: 1px solid rgba(109, 15, 27, .08);
+  box-shadow: 0 12px 40px rgba(109, 15, 27, .06);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   PRICING FEATURED CARD GLOW
+   ══════════════════════════════════════════════════════════════════════ */
+.price-card.featured {
+  box-shadow:
+    0 30px 60px rgba(109, 15, 27, .25),
+    0 0 80px rgba(109, 15, 27, .08);
+  border: 1px solid rgba(255, 255, 255, .1);
+}
+.price-card.featured::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(255,255,255,.06) 0%, transparent 50%, rgba(255,255,255,.03) 100%);
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   URGENCY BADGE PULSE
+   ══════════════════════════════════════════════════════════════════════ */
+.urgency-badge {
+  animation: urgencyPulse 2s ease-in-out infinite;
+}
+@keyframes urgencyPulse {
+  0%, 100% { background: rgba(109, 15, 27, .06); }
+  50% { background: rgba(109, 15, 27, .12); }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   STICKY WHATSAPP BAR — STRONGER
+   ══════════════════════════════════════════════════════════════════════ */
+.sticky-wa-btn {
+  box-shadow: 0 -2px 20px rgba(37, 211, 102, .15);
+  animation: stickyGlow 2s ease-in-out infinite;
+}
+@keyframes stickyGlow {
+  0%, 100% { box-shadow: 0 2px 16px rgba(37, 211, 102, .2); }
+  50% { box-shadow: 0 4px 24px rgba(37, 211, 102, .35); }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   REDUCED MOTION — Accessibility
+   ══════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .hero-entrance { opacity: 1 !important; transform: none !important; }
+}

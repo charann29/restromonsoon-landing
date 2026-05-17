@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurant Profit Audit for ₹249 — Find Where You're Losing Money | Monsoon</title>
+  <meta name="description" content="Find where your restaurant is losing money. Monsoon analyses your POS billing, menu, inventory and staff data — overstaffing, low-margin dishes, inventory waste — and tells you exactly what to fix. ₹249 one-time profit audit for Indian restaurants." />
+  <meta name="keywords" content="restaurant profit audit, restaurant sales intelligence India, menu engineering, food cost optimization, Petpooja data analysis, restaurant analytics India, POS data insights, restaurant business intelligence, profit optimization restaurants, Swiggy Zomato analytics, restaurant audit India" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Monsoon Intelligence Labs" />
+  <link rel="canonical" href="https://monsoon.ai/restaurant-profit-audit" />
+
+  <!-- Geo targeting -->
+  <meta name="geo.region" content="IN" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Restaurant Profit Audit for ₹249 — Find Your Profit Leaks | Monsoon" />
+  <meta property="og:description" content="50+ metrics analysed from your POS data. One ranked list of fixes. Built for Indian restaurant operators who want profit, not dashboards." />
+  <meta property="og:image" content="https://monsoon.ai/uploads/og-image.png" />
+  <meta property="og:url" content="https://monsoon.ai/restaurant-profit-audit" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Restaurant Profit Audit for ₹249 | Monsoon" />
+  <meta name="twitter:description" content="Find where your restaurant is losing money. 50+ metrics. Plain-English report on WhatsApp in 3 days." />
+  <meta name="twitter:image" content="https://monsoon.ai/uploads/og-image.png" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Monsoon Restaurant Profit Audit",
+    "description": "AI-powered profit audit for Indian restaurants. Analyses 50+ operational metrics from POS data and delivers a plain-English report with ranked fixes.",
+    "brand": { "@type": "Organization", "name": "Monsoon Intelligence Labs" },
+    "offers": {
+      "@type": "Offer",
+      "price": "249",
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "500"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "What data do I need to share for a restaurant profit audit?", "acceptedAnswer": {"@type": "Answer", "text": "Just your POS or billing export — Petpooja, Restroworks, SlickPOS, or even a plain Excel sheet. Three months is enough."}},
+      {"@type": "Question", "name": "How is Monsoon different from POS reports?", "acceptedAnswer": {"@type": "Answer", "text": "Your POS shows what happened. Monsoon shows what to do — which dishes to push, where you're overstaffed, which discounts are losing money."}},
+      {"@type": "Question", "name": "Is my restaurant business data safe?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Your data is encrypted, used only to generate your report, and never shared with anyone. You can request deletion any time."}},
+      {"@type": "Question", "name": "Do I need to be tech-savvy to use Monsoon?", "acceptedAnswer": {"@type": "Answer", "text": "No. Upload one file. Get a clear PDF report on WhatsApp in 3 days. Plain English, numbers in rupees."}}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to get a Monsoon restaurant profit audit",
+    "step": [
+      {"@type": "HowToStep", "name": "Upload your POS data", "text": "Export 3 months from Petpooja, Restroworks, or any POS system."},
+      {"@type": "HowToStep", "name": "We analyse your restaurant data", "text": "Our team + AI compare 50+ operational metrics against similar restaurants."},
+      {"@type": "HowToStep", "name": "Get your profit audit report", "text": "A short, plain-English PDF on WhatsApp in 3 days."},
+      {"@type": "HowToStep", "name": "Fix what matters", "text": "Act on the top 3 fixes. Most operators recover ₹40k–₹1.2L/month."}
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles-components.css">
+  <link rel="stylesheet" href="styles-hero.css">
+  <link rel="stylesheet" href="styles-responsive.css">
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" src="shared.jsx"></script>
+  <script type="text/babel" src="sections.jsx"></script>
+  <script type="text/babel" src="direction-a.jsx"></script>
+  <script type="text/babel">
+    // Direction A — Faithful Premium (standalone)
+    const TWEAKS = { theme: "default", dashDensity: "rich", testimonialStyle: "metrics", headlineIdx: 0 };
+    function StandalonePage() {
+      return <DirectionA tweaks={TWEAKS} />;
+    }
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<StandalonePage />);
+  </script>
+</body>
+</html>
